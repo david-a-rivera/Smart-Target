@@ -42,7 +42,7 @@
   "readme": "https://raw.githubusercontent.com/david-a-rivera/Smart-Target/main/README.md",
   "changelog": "https://raw.githubusercontent.com/david-a-rivera/Smart-Target/master/changelog.md",
   "bugs": "https://github.com/david-a-rivera/Smart-Target/issues",
-  "id": "smarttarget",
+  "id": "smarttargetpersonal",
   "relationships": {
     "requires": [
       {
