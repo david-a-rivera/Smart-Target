@@ -112,7 +112,6 @@ class SmartTarget {
           if(containsToken){
             token.setTarget(!token.isTargeted, { releaseOthers: false });
           }
-
         }
       }
     }
