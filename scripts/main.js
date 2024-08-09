@@ -265,4 +265,3 @@ game.keybindings.register(SMARTTARGET_MODULE_NAME, "clearAllTargets", {
 
 
 });
-
