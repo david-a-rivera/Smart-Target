@@ -1,16 +1,13 @@
 import os
 import json
 import zipfile
+import shutil
 
 # Define selected folders
-selected_folders = ['scripts', 'styles', 'assets', 'templates', 'languages', 'packs', 'storage']
+selected_folders = ['scripts', 'styles', 'assets', 'templates', 'lang', 'packs', 'storage']
 
-def read_module_json():
-    with open(file, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-        module_id = data['id']
-        module_version = data['version']
-    return module_id, module_version
+def add_file_dist(file_name, ):
+    shutil.copyfile(file_name, 'dist/' + file_name)
 
 def create_dist_folder():
     if not os.path.exists('dist'):
@@ -26,21 +23,23 @@ def add_folder_to_zip(zip_file, folder):
     else:
         print(f"Warning: {folder} is missing. Skipping.")
 
-def create_zip(module_id, module_version, folders):
-    zip_filename = f'dist/{module_id}-{module_version}.zip'
+def create_zip(folders):
+    zip_filename = f'dist/module.zip'
     with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         zip_file.write('module.json')
+        zip_file.write('LICENSE')
 
         for folder in folders:
             add_folder_to_zip(zip_file, folder)
 
     print(f"Zip file '{zip_filename}' created successfully.")
 
-def main():
-    module_id, module_version = read_module_json()
+def main():    
     create_dist_folder()
 
-    create_zip(module_id, module_version, selected_folders)
+    add_file_dist("module.json")
+
+    create_zip(selected_folders)
 
 if __name__ == "__main__":
     main()
