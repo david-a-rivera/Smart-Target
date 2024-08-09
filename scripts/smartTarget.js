@@ -67,12 +67,28 @@ class SmartTarget {
         if (release)canvas.tokens.placeables[0]?.setTarget(false, { releaseOthers: true });
         for(let token of canvas.tokens.placeables){
           const containsToken = (() => {
+            const topLeft = {
+              x: (token.center.x-(token.shape.width/2))-closestTemplate.x, 
+              y: (token.center.y-(token.shape.height/2))-closestTemplate.y
+            };
+            const topRight = {
+              x: (token.center.x+(token.shape.width/2))-closestTemplate.x, 
+              y: (token.center.y-(token.shape.height/2))-closestTemplate.y
+            };
+            const bottomLeft = {
+              x: (token.center.x-(token.shape.width/2))-closestTemplate.x, 
+              y: (token.center.y+(token.shape.height/2))-closestTemplate.y
+            };
+            const bottomRight = {
+              x: (token.center.x+(token.shape.width/2))-closestTemplate.x, 
+              y: (token.center.y+(token.shape.height/2))-closestTemplate.y
+            };
             switch (templateTargetingOption){
               case 2:
-                return closestTemplate.shape.contains(token.shape.x-closestTemplate.x,token.shape.y-closestTemplate.y) ||
-                       closestTemplate.shape.contains((token.shape.x + token.shape.width)-closestTemplate.x,token.shape.y-closestTemplate.y) ||
-                       closestTemplate.shape.contains(token.shape.x-closestTemplate.x,(token.shape.y+token.shape.height)-closestTemplate.y) ||
-                       closestTemplate.shape.contains((token.shape.x + token.shape.width)-closestTemplate.x,(token.shape.y+token.shape.height)-closestTemplate.y);
+                return closestTemplate.shape.contains(topLeft.x, topRight.y) ||
+                       closestTemplate.shape.contains(topRight.x, topRight.y) ||
+                       closestTemplate.shape.contains(bottomRight.x, bottomRight.y) ||
+                       closestTemplate.shape.contains(bottomLeft.x, bottomRight.y);
               default:
                 return closestTemplate.shape.contains(token.center.x-closestTemplate.x,token.center.y-closestTemplate.y);
             }
